@@ -10,5 +10,5 @@ interface LoginView: BaseView {
     var passwordErrorId: Int?
     fun requestEmailFocus()
     fun requestPasswordFocus()
-    fun informAboutLoginSuccess(token: String)
+    fun pass(token: String)
 }

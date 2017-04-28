@@ -1,7 +1,6 @@
 package com.marcinmoskala.simplekotlinmvpboilerplate.presentation.common
 
 import android.os.Bundle
-import com.marcinmoskala.simplekotlinmvpboilerplate.presentation.common.BaseView
 import com.marcinmoskala.simplekotlinmvpboilerplate.utills.toast
 
 abstract class PresenterBaseActivity : BaseActivity(), BaseView {
@@ -36,7 +35,7 @@ abstract class PresenterBaseActivity : BaseActivity(), BaseView {
         e.message?.let { toast("Error: $it") }
         e.printStackTrace()
         e.cause?.printStackTrace()
-        }
+    }
 
     override fun showErrorAndFinish(e: Throwable) {
         showError(e)

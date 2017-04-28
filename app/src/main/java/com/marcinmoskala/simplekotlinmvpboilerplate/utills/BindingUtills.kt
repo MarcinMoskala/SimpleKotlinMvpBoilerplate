@@ -7,11 +7,11 @@ import kotlin.reflect.KProperty
 
 // TODO Should be extraced to sepetate lib
 
-@JvmName("bindStringToTextViewText") fun bindToText(viewProvider: () -> TextView): ReadWriteProperty<Any?, String> = TextViewTextBinding(viewProvider)
+fun bindToText(viewProvider: () -> TextView): ReadWriteProperty<Any?, String> = TextViewTextBinding(viewProvider)
 
-@JvmName("bindStringToEditTextText") fun bindToText(viewProvider: () -> EditText): ReadWriteProperty<Any?, String> = EditTextViewTextBinding(viewProvider)
+fun bindToEditText(viewProvider: () -> EditText): ReadWriteProperty<Any?, String> = EditTextViewTextBinding(viewProvider)
 
-@JvmName("bindStringToEditTextError") fun bindToErrorId(viewProvider: () -> EditText): ReadWriteProperty<Any?, Int?> = EditTextViewErrorIdBinding(viewProvider)
+fun bindToErrorId(viewProvider: () -> EditText): ReadWriteProperty<Any?, Int?> = EditTextViewErrorIdBinding(viewProvider)
 
 private class TextViewTextBinding(viewProvider: () -> TextView) : ReadWriteProperty<Any?, String> {
 

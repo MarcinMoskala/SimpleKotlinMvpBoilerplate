@@ -38,6 +38,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile libs.junit
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 
 repositories {
