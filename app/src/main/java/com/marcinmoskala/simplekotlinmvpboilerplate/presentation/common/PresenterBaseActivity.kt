@@ -36,9 +36,4 @@ abstract class PresenterBaseActivity : BaseActivity(), BaseView {
         e.printStackTrace()
         e.cause?.printStackTrace()
     }
-
-    override fun showErrorAndFinish(e: Throwable) {
-        showError(e)
-        finish()
-    }
 }

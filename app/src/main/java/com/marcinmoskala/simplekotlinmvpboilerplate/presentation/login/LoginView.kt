@@ -1,5 +1,6 @@
 package com.marcinmoskala.simplekotlinmvpboilerplate.presentation.login
 
+import com.marcinmoskala.simplekotlinmvpboilerplate.model.User
 import com.marcinmoskala.simplekotlinmvpboilerplate.presentation.common.BaseView
 
 interface LoginView: BaseView {
@@ -10,5 +11,5 @@ interface LoginView: BaseView {
     var passwordErrorId: Int?
     fun requestEmailFocus()
     fun requestPasswordFocus()
-    fun pass(token: String)
+    fun pass(user: User)
 }

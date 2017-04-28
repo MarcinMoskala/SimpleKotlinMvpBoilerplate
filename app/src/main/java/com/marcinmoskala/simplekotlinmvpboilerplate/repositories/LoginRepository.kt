@@ -1,6 +1,7 @@
-package com.marcinmoskala.simplekotlinmvpboilerplate.network
+package com.marcinmoskala.simplekotlinmvpboilerplate.repositories
 
-import com.marcinmoskala.simplekotlinmvpboilerplate.network.LoginResponse
+import com.marcinmoskala.simplekotlinmvpboilerplate.model.User
+import com.marcinmoskala.simplekotlinmvpboilerplate.repositories.providers.Provider
 import io.reactivex.Observable
 
 interface LoginRepository {
@@ -10,11 +11,9 @@ interface LoginRepository {
     class MockLoginRepository : LoginRepository {
         override fun attemptLogin(email: String, pass: String): Observable<LoginResponse> = when {
             email.endsWith(".pl") -> throw Error("Invalid Email")
-            else -> Observable.just(LoginResponse("TokenToken"))
+            else -> Observable.just(LoginResponse("TokenToken", User(email)))
         }
     }
 
-    companion object {
-        fun lazyGet(): Lazy<LoginRepository> = lazy { MockLoginRepository() }
-    }
+    companion object : Provider<LoginRepository>({ MockLoginRepository() })
 }

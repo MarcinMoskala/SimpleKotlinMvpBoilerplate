@@ -3,6 +3,7 @@ package com.marcinmoskala.simplekotlinmvpboilerplate.presentation.login
 import android.os.Bundle
 import android.view.View
 import com.marcinmoskala.simplekotlinmvpboilerplate.R
+import com.marcinmoskala.simplekotlinmvpboilerplate.model.User
 import com.marcinmoskala.simplekotlinmvpboilerplate.presentation.common.PresenterBaseActivity
 import com.marcinmoskala.simplekotlinmvpboilerplate.presentation.main.MainActivityStarter
 import com.marcinmoskala.simplekotlinmvpboilerplate.utills.bindToEditText
@@ -37,7 +38,7 @@ class LoginActivity : PresenterBaseActivity(), LoginView {
         passwordView.requestFocus()
     }
 
-    override fun pass(token: String) {
-        MainActivityStarter.start(this, token)
+    override fun pass(user: User) {
+        MainActivityStarter.start(this, user)
     }
 }

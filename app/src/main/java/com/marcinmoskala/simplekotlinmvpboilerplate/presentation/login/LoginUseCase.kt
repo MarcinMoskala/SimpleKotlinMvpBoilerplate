@@ -1,6 +1,6 @@
 package com.marcinmoskala.simplekotlinmvpboilerplate.presentation.login
 
-import com.marcinmoskala.simplekotlinmvpboilerplate.network.LoginRepository
+import com.marcinmoskala.simplekotlinmvpboilerplate.repositories.LoginRepository
 
 class LoginUseCase {
 

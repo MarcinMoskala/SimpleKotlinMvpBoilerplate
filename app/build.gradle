@@ -33,6 +33,8 @@ dependencies {
     compile libs.kotlin
     compile libs.activitystarter
     kapt libs.activitystarter_kapt
+    compile libs.paper_parcel
+    kapt libs.paper_parcel_kapt
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

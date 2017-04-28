@@ -1,6 +1,7 @@
 package com.marcinmoskala.simplekotlinmvpboilerplate.presentation.login
 
 import com.marcinmoskala.simplekotlinmvpboilerplate.presentation.common.Presenter
+import com.marcinmoskala.simplekotlinmvpboilerplate.repositories.Pref
 import com.marcinmoskala.simplekotlinmvpboilerplate.utills.applySchedulers
 import com.marcinmoskala.simplekotlinmvpboilerplate.utills.smartSubscribe
 
@@ -33,7 +34,10 @@ class LoginPresenter(val view: LoginView) : Presenter() {
                 .applySchedulers()
                 .smartSubscribe(
                         onStart = { view.progressVisible = true },
-                        onSuccess = { (token) -> view.pass(token) },
+                        onSuccess = { (token, user) ->
+                            Pref.token = token
+                            view.pass(user)
+                        },
                         onError = view::showError,
                         onFinish = { view.progressVisible = false }
                 )

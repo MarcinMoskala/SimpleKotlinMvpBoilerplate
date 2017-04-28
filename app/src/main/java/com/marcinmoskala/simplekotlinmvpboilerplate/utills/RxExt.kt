@@ -1,12 +1,13 @@
 package com.marcinmoskala.simplekotlinmvpboilerplate.utills
 
+import com.marcinmoskala.kotlinpreferences.PreferenceHolder
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-fun <T> Observable<T>.applySchedulers(): Observable<T> =
+fun <T> Observable<T>.applySchedulers(): Observable<T> = if(PreferenceHolder.testingMode) this else
         subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
