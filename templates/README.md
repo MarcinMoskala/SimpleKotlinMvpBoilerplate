@@ -1,0 +1,1 @@
+There are templates for Activity or Fragment creation. To use them you need to copy template folder (for example KotlinMvpActivity) to local folder witb templates (in Windows is is C:\Program Files\Android\Android Studio\plugins\android\lib\templates\activities)
