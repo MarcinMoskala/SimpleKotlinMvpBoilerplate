@@ -7,10 +7,14 @@ import com.marcinmoskala.simplekotlinmvpboilerplate.utills.smartSubscribe
 
 class LoginPresenter(val view: LoginView) : Presenter() {
 
-    val loginUseCase by lazy { LoginUseCase() }
-    val validateLoginFieldsUseCase by lazy { ValidateLoginFieldsUseCase() }
+    private val loginUseCase by lazy { LoginUseCase() }
+    private val validateLoginFieldsUseCase by lazy { ValidateLoginFieldsUseCase() }
 
-    fun attemptLogin() {
+    override fun onStart() {
+        view.loginButtonClickedCallback = { attemptLogin() }
+    }
+
+    private fun attemptLogin() {
         val (email, password) = view.email to view.password
         subscriptions += validateLoginFieldsUseCase.validateLogin(email, password)
                 .smartSubscribe(
@@ -23,8 +27,8 @@ class LoginPresenter(val view: LoginView) : Presenter() {
         view.passwordErrorId = passwordErrorId
         view.emailErrorId = emailErrorId
         when {
-            emailErrorId != null -> view.requestEmailFocus()
-            passwordErrorId != null -> view.requestPasswordFocus()
+            emailErrorId != null -> view.emailRequestFocus()
+            passwordErrorId != null -> view.passwordRequestFocus()
             else -> sendLoginRequest(email, password)
         }
     }

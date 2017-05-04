@@ -12,8 +12,6 @@ import org.junit.Test
 
 class LoginPresenterTest {
 
-    fun getMockView(email: String, password: String) = MockLoginView(email, password)
-
     @Before
     fun setUp() {
         PreferenceHolder.testingMode = true
@@ -22,9 +20,10 @@ class LoginPresenterTest {
 
     @Test
     fun checkBothLoginFieldsEmpty() {
-        val mockedView = getMockView("", "")
+        val mockedView = MockedLoginView()
         val presenter = LoginPresenter(mockedView)
-        presenter.attemptLogin()
+        presenter.onStart()
+        mockedView.loginButtonClickedCallback.invoke()
         checkVaildity(mockedView,
                 expectedEmailError = R.string.error_field_required,
                 expectedPasswordError = R.string.error_field_required
@@ -33,9 +32,10 @@ class LoginPresenterTest {
 
     @Test
     fun checkBothLoginFieldsErrored() {
-        val mockedView = getMockView("MarcinMoskala", "KOKO")
+        val mockedView = MockedLoginView("MarcinMoskala", "KOKO")
         val presenter = LoginPresenter(mockedView)
-        presenter.attemptLogin()
+        presenter.onStart()
+        mockedView.loginButtonClickedCallback.invoke()
         checkVaildity(mockedView,
                 expectedEmailError = R.string.error_invalid_email,
                 expectedPasswordError = R.string.error_invalid_password
@@ -44,17 +44,19 @@ class LoginPresenterTest {
 
     @Test
     fun checkEmailFieldErrored() {
-        val mockedView = getMockView("MarcinMoskala", "KOKOKOKO")
+        val mockedView = MockedLoginView("MarcinMoskala", "KOKOKOKO")
         val presenter = LoginPresenter(mockedView)
-        presenter.attemptLogin()
+        presenter.onStart()
+        mockedView.loginButtonClickedCallback.invoke()
         checkVaildity(mockedView, expectedEmailError = R.string.error_invalid_email)
     }
 
     @Test
     fun checkPasswordFieldErrored() {
-        val mockedView = getMockView("marcinmoskala@gmail.com", "KOKO")
+        val mockedView = MockedLoginView("marcinmoskala@gmail.com", "KOKO")
         val presenter = LoginPresenter(mockedView)
-        presenter.attemptLogin()
+        presenter.onStart()
+        mockedView.loginButtonClickedCallback.invoke()
         checkVaildity(mockedView, expectedPasswordError = R.string.error_invalid_password)
     }
 
@@ -65,9 +67,10 @@ class LoginPresenterTest {
                 return Observable.error(Error("Network connection error"))
             }
         }
-        val mockedView = getMockView("marcinmoskala@gmail.com", "KOKOKOKO")
+        val mockedView = MockedLoginView("marcinmoskala@gmail.com", "KOKOKOKO")
         val presenter = LoginPresenter(mockedView)
-        presenter.attemptLogin()
+        presenter.onStart()
+        mockedView.loginButtonClickedCallback.invoke()
         waitUntilAllUnsubscribed(presenter)
         LoginRepository.override = null
         checkVaildity(mockedView, expectedNetworkError = true)
@@ -80,16 +83,17 @@ class LoginPresenterTest {
                 return Observable.just(LoginResponse("SomeToken", User(email)))
             }
         }
-        val mockedView = getMockView("marcinmoskala@gmail.com", "KOKOKOKO")
+        val mockedView = MockedLoginView("marcinmoskala@gmail.com", "KOKOKOKO")
         val presenter = LoginPresenter(mockedView)
-        presenter.attemptLogin()
+        presenter.onStart()
+        mockedView.loginButtonClickedCallback.invoke()
         waitUntilAllUnsubscribed(presenter)
         LoginRepository.override = null
         checkVaildity(mockedView, expectedLoginCorrect = true)
     }
 
     private fun checkVaildity(
-            mockedView: MockLoginView,
+            mockedView: MockedLoginView,
             expectedEmailError: Int? = null,
             expectedPasswordError: Int? = null,
             expectedLoginCorrect: Boolean = false,

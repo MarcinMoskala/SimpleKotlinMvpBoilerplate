@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 25
@@ -35,6 +34,7 @@ dependencies {
     kapt libs.activitystarter_kapt
     compile libs.paper_parcel
     kapt libs.paper_parcel_kapt
+    compile libs.kotlinandroidviewbindings
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

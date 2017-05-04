@@ -9,7 +9,8 @@ interface LoginView: BaseView {
     var password: String
     var emailErrorId: Int?
     var passwordErrorId: Int?
-    fun requestEmailFocus()
-    fun requestPasswordFocus()
+    var loginButtonClickedCallback: ()->Unit
+    val emailRequestFocus: ()->Unit
+    val passwordRequestFocus: ()->Unit
     fun pass(user: User)
 }
