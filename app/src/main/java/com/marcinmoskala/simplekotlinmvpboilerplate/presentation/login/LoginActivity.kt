@@ -21,7 +21,7 @@ class LoginActivity : PresenterBaseActivity(), LoginView {
 
     override var loginButtonClickedCallback by bindToClick(R.id.loginButton)
 
-    override val presenter by lazy { LoginPresenter(this) }
+    val loginPresenter by presenter { LoginPresenter(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

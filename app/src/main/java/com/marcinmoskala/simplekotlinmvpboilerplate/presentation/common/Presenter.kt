@@ -1,20 +1,14 @@
 package com.marcinmoskala.simplekotlinmvpboilerplate.presentation.common
 
-import io.reactivex.disposables.Disposable
+interface Presenter {
 
-abstract class Presenter {
+    fun onCreate() {}
 
-    var subscriptions: List<Disposable> = emptyList()
+    fun onStart() {}
 
-    open fun onStart() {}
+    fun onDestroy() {}
 
-    open fun onDestroy() {
-        subscriptions.forEach { it.dispose() }
-    }
+    fun onStop() {}
 
-    open fun onStop() {
-    }
-
-    open fun onResume() {
-    }
+    fun onResume() {}
 }

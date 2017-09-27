@@ -14,7 +14,7 @@ open class BaseActivity(): AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        ActivityStarter.save(this, outState)
+        ActivityStarter.save(this)
     }
 
     protected fun initToolbar(toolbar: Toolbar) {

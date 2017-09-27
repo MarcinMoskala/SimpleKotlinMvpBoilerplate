@@ -1,11 +1,11 @@
 package com.marcinmoskala.simplekotlinmvpboilerplate.presentation.login
 
-import com.marcinmoskala.simplekotlinmvpboilerplate.presentation.common.Presenter
+import com.marcinmoskala.simplekotlinmvpboilerplate.presentation.common.RxPresenter
 import com.marcinmoskala.simplekotlinmvpboilerplate.repositories.Pref
 import com.marcinmoskala.simplekotlinmvpboilerplate.utills.applySchedulers
 import com.marcinmoskala.simplekotlinmvpboilerplate.utills.smartSubscribe
 
-class LoginPresenter(val view: LoginView) : Presenter() {
+class LoginPresenter(val view: LoginView) : RxPresenter() {
 
     private val loginUseCase by lazy { LoginUseCase() }
     private val validateLoginFieldsUseCase by lazy { ValidateLoginFieldsUseCase() }

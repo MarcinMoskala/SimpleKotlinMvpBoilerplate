@@ -11,7 +11,7 @@ import com.marcinmoskala.simplekotlinmvpboilerplate.presentation.common.Presente
 class MainActivity : PresenterBaseActivity(), MainView {
 
     @Arg lateinit var user: User
-    override val presenter: Presenter by lazy { MainPresenter(this, user) }
+    val mainPresenter: Presenter by presenter { MainPresenter(this, user) }
 
     override var mainText: String by bindToTextView(R.id.textView)
 
